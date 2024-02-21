@@ -7,10 +7,6 @@ const Image = require('../models/Image.model.js')
 // const generateTokenAndSetCookie = require("../utils/generateToken.js");
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = `${process.env.JWT_SECREET}`;
-const express = require("express");
-const app = express();
-app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: false }));
 const nodemailer = require("nodemailer");
 
 
