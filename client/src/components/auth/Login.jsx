@@ -17,7 +17,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    // axios.defaults.withCredentials=true;
+    axios.defaults.withCredentials = true;
     const Handlelogin = async (e) => {
         e.preventDefault();
         setLoading(true)
