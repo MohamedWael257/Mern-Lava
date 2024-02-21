@@ -13,8 +13,6 @@
         }
     ],
     "functions": {
-        "*.js": {
-            "maxDuration": 60
-        }
+        "timeout": 60
     }
 }
