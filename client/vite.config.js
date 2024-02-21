@@ -1,5 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import dotnev from 'dotenv'
+dotnev.config()
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,5 +14,8 @@ export default defineConfig({
   //   },
   // },
   // },
+  define: {
+    'process.env': process.env
+  }
   // base: "/Mern-Lava/"
 })
