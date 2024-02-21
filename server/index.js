@@ -15,14 +15,13 @@ const PORT = process.env.PORT || 5000
 //         credentials: true
 //     }
 // ));
-// app.use(cors(
-//     {
-//         origin: '*',
-//         // origin: ['https://mern-lava-client.vercel.app'],
-//         methods: ['POST', 'GET', 'PUT', 'DELETE'],
-//         credentials: true
-//     }
-// ));
+app.use(cors(
+    {
+        origin: ['https://mern-lava-server.vercel.app'],
+        methods: ['POST', 'GET', 'PUT', 'DELETE'],
+        credentials: true
+    }
+));
 
 // httpProxy = require('http-proxy');
 // const proxy = httpProxy.createProxyServer({
@@ -50,13 +49,14 @@ const chatRoutes = require("./routes/chat.routes");
 const testimonialRoutes = require('./routes/testimonial.routes')
 app.use(cookieParser());
 app.use(express.json());
+// app.use(express.json({ limit: "25mb" }));
 // let corsOptions = {
 //     origin: ["http://localhost:5000", "https://mern-lava-server.vercel.app"],
 // methods: ['POST', 'GET', 'PUT', 'DELETE'],
 // credentials: true
 // };
 // app.use(cors(corsOptions));
-app.use(cors())
+// app.use(cors())
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
