@@ -81,9 +81,10 @@ app.get("/", async (req, res) => {
 app.get('/getAllUser', async (req, res) => {
     try {
         const allUser = await User.find({});
-        res.send({ status: "ok", data: allUser });
+        // res.send({ status: "ok", data: allUser });
+        res.send(allUser);
     } catch (error) {
-        console.log(error);
+        res.send(error);
     }
 })
 // Define routes and middleware
