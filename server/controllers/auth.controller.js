@@ -4,7 +4,7 @@ const Chats = require("../models/chats.model.js");
 const Orders = require('../models/orders.model.js')
 const Booking = require('../models/booking.model.js')
 const Image = require('../models/Image.model.js')
-const generateTokenAndSetCookie = require("../utils/generateToken.js");
+// const generateTokenAndSetCookie = require("../utils/generateToken.js");
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = `${process.env.JWT_SECREET}`;
 const express = require("express");
@@ -336,12 +336,12 @@ const reset_password_id_token_post = async (req, res) => {
     // }
 };
 const getAllUser = async (req, res) => {
-    // try {
-    const allUser = await User.find({});
-    res.json({ status: "ok", data: allUser });
-    // } catch (error) {
-    //     console.log(error);
-    // }
+    try {
+        const allUser = await User.find({});
+        res.send({ status: "ok", data: allUser });
+    } catch (error) {
+        console.log(error);
+    }
 };
 const getAllUser_no_admin = async (req, res) => {
     try {
