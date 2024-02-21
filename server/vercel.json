@@ -12,9 +12,6 @@
     ],
     "routes": [
         {
-            "handle": "server"
-        },
-        {
             "src": "/api/(.*)",
             "dest": "api/$1"
         }
