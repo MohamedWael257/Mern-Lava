@@ -72,6 +72,9 @@ const connectToMongoDB = require("./db/ConnectToMongoDB.js");
 // db.once('open', () => {
 //   console.log('Connected to MongoDB');
 // });
+app.get("/", async (req, res) => {
+    res.send("server running")
+});
 
 // Define routes and middleware
 app.listen(PORT, () => {
