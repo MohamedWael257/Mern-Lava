@@ -17,7 +17,8 @@ const PORT = process.env.PORT || 5000
 // ));
 app.use(cors(
     {
-        origin: ['https://mern-lava-server.vercel.app'],
+        // origin: ['https://mern-lava-server.vercel.app'],
+        origin: ['http://localhost:5000'],
         methods: ['POST', 'GET', 'PUT', 'DELETE'],
         credentials: true
     }
