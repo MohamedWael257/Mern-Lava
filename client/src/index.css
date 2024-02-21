@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: "Inter", sans-serif;
+}
+
+:root {
+  --black: #06090d;
+  --black-rgba-8: rgba(0, 0, 0, 0.8);
+  --black-rgba-7: rgba(0, 0, 0, 0.7);
+  --dark-blue: #05bbfe;
+  --dark-blue: #077cff;
+  --dark-blue: #477cff;
+  --hex-blue: #0f5069e8;
+  --dark-blue: #1f93ff;
+  --dark-blue: #162938;
+  --dark-blue: #b624ff;
+  --dark-blue: #1f93ff;
+  --orangered: orangered;
+}
+
+body {
+  /* background-color: #06090d; */
+
+}
+
+input {
+  outline: none;
+}
+
+button {
+  border: none;
+}
+
+html::-webkit-scrollbar {
+  width: .7rem;
+  background: #21252b;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: rgb(4, 128, 223);
+}
+
+::selection {
+  background: rgb(4, 128, 223);
+  color: #21252b;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+ul,
+li {
+  list-style: none;
+}
+
+.chats {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)), url("./assets/chat-background.jpg");
+  background-repeat: repeat;
+  /* background-position: top center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #06090d; */
+}

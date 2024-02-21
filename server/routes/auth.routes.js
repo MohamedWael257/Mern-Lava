@@ -9,7 +9,7 @@ router.post("/verify/:token", verify);
 router.post("/forgot-password", forgot_password);
 router.get("/reset-password/:id/:token", reset_password_id_token_get);
 // router.post("/reset-password/:id/:token", reset_password_id_token_post);
-router.post('/getAllUser', getAllUser);
+router.get('/getAllUser', getAllUser);
 router.get('/getAllUser-no-admin', getAllUser_no_admin);
 router.get('/getAdmin', getAdmin);
 router.post('/deleteUser', deleteUser);
