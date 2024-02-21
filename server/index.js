@@ -42,12 +42,12 @@ dotenv.config();
 //         }
 //     });
 // })
-const authRoutes = require("./routes/auth.routes");
-const bookingRoutes = require("./routes/booking.routes");
-const productsRoutes = require("./routes/products.routes");
-const storeRoutes = require("./routes/store.routes");
-const chatRoutes = require("./routes/chat.routes");
-const testimonialRoutes = require('./routes/testimonial.routes')
+// const authRoutes = require("./routes/auth.routes");
+// const bookingRoutes = require("./routes/booking.routes");
+// const productsRoutes = require("./routes/products.routes");
+// const storeRoutes = require("./routes/store.routes");
+// const chatRoutes = require("./routes/chat.routes");
+// const testimonialRoutes = require('./routes/testimonial.routes')
 app.use(cookieParser());
 app.use(express.json());
 // let corsOptions = {
@@ -61,14 +61,15 @@ app.use(cors())
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/api/auth", authRoutes);
-app.use("/api/booking", bookingRoutes);
-app.use("/api/products", productsRoutes);
-app.use("/api/store", storeRoutes);
-app.use("/api/chat", chatRoutes);
-app.use("/api/testimonial", testimonialRoutes);
+// app.use("/api/auth", authRoutes);
+// app.use("/api/booking", bookingRoutes);
+// app.use("/api/products", productsRoutes);
+// app.use("/api/store", storeRoutes);
+// app.use("/api/chat", chatRoutes);
+// app.use("/api/testimonial", testimonialRoutes);
 // Connect to MongoDB
 const connectToMongoDB = require("./db/ConnectToMongoDB.js");
+const User = require("./models/user.model.js");
 // const db = connectToMongoDB.connection;
 // db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 // db.once('open', () => {
@@ -77,7 +78,14 @@ const connectToMongoDB = require("./db/ConnectToMongoDB.js");
 app.get("/", async (req, res) => {
     res.send("server running")
 });
-
+app.get('/getAllUser', async (req, res) => {
+    try {
+        const allUser = await User.find({});
+        res.send({ status: "ok", data: allUser });
+    } catch (error) {
+        console.log(error);
+    }
+})
 // Define routes and middleware
 app.listen(PORT, () => {
     connectToMongoDB();
