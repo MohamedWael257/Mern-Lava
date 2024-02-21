@@ -12,7 +12,9 @@
             "dest": "/index.js"
         }
     ],
-    "functions": {
-        "timeout": 60
-    }
+    "functions": [
+        {
+            "timeout": 60
+        }
+    ]
 }
