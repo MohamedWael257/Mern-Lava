@@ -76,17 +76,11 @@ const User = require("./models/user.model.js");
 //   console.log('Connected to MongoDB');
 // });
 app.get("/", async (req, res) => {
-    res.send("server running")
+    const allUser = await User.find({});
+    // res.send({ status: "ok", data: allUser });
+    res.send(allUser);
+    // res.send("server running")
 });
-app.get('/getAllUser', async (req, res) => {
-    try {
-        const allUser = await User.find({});
-        // res.send({ status: "ok", data: allUser });
-        res.send(allUser);
-    } catch (error) {
-        res.send(error);
-    }
-})
 // Define routes and middleware
 app.listen(PORT, () => {
     connectToMongoDB();
