@@ -7,13 +7,22 @@ const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 
 const PORT = process.env.PORT || 5000
-// app.use(cors(
-//     {
-//         origin: ['https://mern-lava-client.vercel.app'],
-//         methods: ['POST', 'GET'],
-//         credentials: true
-//     }
-// ));
+app.options('', cors(
+    {
+        origin: '*',
+        // origin: ['https://mern-lava-client.vercel.app'],
+        methods: ['POST', 'GET', 'PUT', 'DELETE'],
+        credentials: true
+    }
+));
+app.use(cors(
+    {
+        origin: '*',
+        // origin: ['https://mern-lava-client.vercel.app'],
+        methods: ['POST', 'GET', 'PUT', 'DELETE'],
+        credentials: true
+    }
+));
 
 // httpProxy = require('http-proxy');
 // const proxy = httpProxy.createProxyServer({
@@ -45,7 +54,7 @@ app.use(express.json());
 //     origin: ["http://localhost:5000", "https://mern-lava-server.vercel.app"],
 // };
 // app.use(cors(corsOptions));
-app.use(cors())
+// app.use(cors())
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
