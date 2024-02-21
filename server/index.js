@@ -42,6 +42,12 @@ dotenv.config();
 //         }
 //     });
 // })
+const authRoutes = require("./routes/auth.routes");
+const bookingRoutes = require("./routes/booking.routes");
+const productsRoutes = require("./routes/products.routes");
+const storeRoutes = require("./routes/store.routes");
+const chatRoutes = require("./routes/chat.routes");
+const testimonialRoutes = require('./routes/testimonial.routes')
 app.use(cookieParser());
 app.use(express.json());
 // let corsOptions = {
@@ -54,6 +60,13 @@ app.use(cors())
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
+
+app.use("/api/auth", authRoutes);
+app.use("/api/booking", bookingRoutes);
+app.use("/api/products", productsRoutes);
+app.use("/api/store", storeRoutes);
+app.use("/api/chat", chatRoutes);
+app.use("/api/testimonial", testimonialRoutes);
 // Connect to MongoDB
 const connectToMongoDB = require("./db/ConnectToMongoDB.js");
 // const db = connectToMongoDB.connection;
