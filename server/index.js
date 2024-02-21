@@ -10,19 +10,18 @@ const PORT = process.env.PORT || 5000
 // app.options('', cors(
 //     {
 //         origin: '*',
-//         // origin: ['https://mern-lava-client.vercel.app'],
+//         // origin: ['https://mern-lava-server.vercel.app'],
 //         methods: ['POST', 'GET', 'PUT', 'DELETE'],
 //         credentials: true
 //     }
 // ));
-app.use(cors(
-    {
-        // origin: ['https://mern-lava-server.vercel.app'],
-        origin: ['http://localhost:5000'],
-        methods: ['POST', 'GET', 'PUT', 'DELETE'],
-        credentials: true
-    }
-));
+// app.use(cors(
+//     {
+//         origin: ['https://mern-lava-server.vercel.app'],
+//         methods: ['POST', 'GET', 'PUT', 'DELETE'],
+//         credentials: true
+//     }
+// ));
 
 // httpProxy = require('http-proxy');
 // const proxy = httpProxy.createProxyServer({
@@ -57,7 +56,7 @@ app.use(express.json());
 // credentials: true
 // };
 // app.use(cors(corsOptions));
-// app.use(cors())
+app.use(cors())
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
