@@ -335,9 +335,9 @@ const reset_password_id_token_post = async (req, res) => {
     //     res.json({ status: "Something Went Wrong" });
     // }
 };
-const getAllUser = async (req, res) => {
+const getAllUser = (req, res) => {
     try {
-        const allUser = await User.find({});
+        const allUser = User.find({});
         res.send({ status: "ok", data: allUser });
     } catch (error) {
         console.log(error);
