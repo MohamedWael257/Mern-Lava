@@ -1,4 +1,4 @@
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const User = require("../models/user.model.js");
 const Chats = require("../models/chats.model.js");
 const Orders = require('../models/orders.model.js')
@@ -7,6 +7,7 @@ const Image = require('../models/Image.model.js')
 const generateTokenAndSetCookie = require("../utils/generateToken.js");
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = `${process.env.JWT_SECREET}`;
+const crypto = require("crypto");
 const express = require("express");
 const app = express();
 app.set("view engine", "ejs");
@@ -145,40 +146,37 @@ const login = async (req, res) => {
         const token = jwt.sign({ email: user.email }, JWT_SECRET, {
             expiresIn: "15d",
         });
-        // const token = jwt.sign(user._id , JWT_SECRET, {
-        //     expiresIn: "30d",
-        // });
-        const url = `http://localhost:3000/api/auth/verify/${token}`
-
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            host: process.env.SMTP_HOST,
-            port: process.env.SMTP_PORT,
-            secure: false,
-            // pool: true,
-            auth: {
-                // adarsh438tcsckandivali
-                user: process.env.SMTP_MAIL,
-                pass: process.env.SMTP_PASS,
-            },
-        });
-        const mailOptions = {
-            to: email,
-            subject: 'Verify Account',
-            html: `Click <a href = '${url}'>here</a> to confirm your email.`
-        };
-        transporter.sendMail(mailOptions, function (error, info) {
-            if (error) {
-                res.json(error);
-            }
-            else {
-                res.json(`Email sent: ${email}` + info.response);
-            }
-        });
-        if (res.status(201)) {
+        if (user.__v === 0) {
+            const url = `http://localhost:5000/api/auth/verify/${token}`
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                host: process.env.SMTP_HOST,
+                port: process.env.SMTP_PORT,
+                secure: false,
+                // pool: true,
+                auth: {
+                    // adarsh438tcsckandivali
+                    user: process.env.SMTP_MAIL,
+                    pass: process.env.SMTP_PASS,
+                },
+            });
+            const mailOptions = {
+                to: email,
+                subject: 'Verify Account',
+                html: `Click <a href = '${url}'>here</a> to confirm your email.`
+            };
+            transporter.sendMail(mailOptions, function (error, info) {
+                if (error) {
+                    res.json(error);
+                }
+                else {
+                    res.json(`Email sent: ${email}` + info.response);
+                }
+            });
+            return res.json({ error: "verfy your email first before login" });
+        }
+        else {
             return res.json({ status: "ok", data: token });
-        } else {
-            return res.json({ error: "error" });
         }
 
     }
@@ -192,6 +190,7 @@ const verify = async (req, res) => {
             message: "Missing Token"
         });
     }
+
     // Step 1 -  Verify the token from the URL
     let payload = null;
     try {
@@ -211,7 +210,7 @@ const verify = async (req, res) => {
         }
         //     // Step 3 - Update user verification status to true
         // res.json(user)
-        user.__v = true;
+        user.__v = 1;
         await user.save();
         return res.send({
             message: "Account Verified"
@@ -293,17 +292,43 @@ const reset_password_id_token_get = async (req, res) => {
     const { id, token } = req.params;
     // console.log(req.params);
     const oldUser = await User.findOne({ _id: id });
-    if (!oldUser) {
-        return res.json({ status: "User Not Exists!!" });
-    }
-
-    const secret = JWT_SECRET + oldUser.password;
     try {
-        const verify = jwt.verify(token, secret);
-        res.render("index", { email: verify.email, status: "Not Verified" });
+        if (!oldUser) {
+            return res.json({ status: "User Not Exists!!" });
+        }
+        // const secret = JWT_SECRET + oldUser.password;
+        const url = `http://localhost:5173/Resetpassword/${id}/${token}`
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            host: process.env.SMTP_HOST,
+            port: process.env.SMTP_PORT,
+            secure: false,
+            // pool: true,
+            auth: {
+                // adarsh438tcsckandivali
+                user: process.env.SMTP_MAIL,
+                pass: process.env.SMTP_PASS,
+            },
+        });
+        const mailOptions = {
+            to: oldUser.email,
+            subject: 'Verify Account',
+            html: `Click <a href = '${url}'>here</a> to reset ypur password.`
+        };
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                res.json(error);
+            }
+            else {
+                res.json(`Email sent: ${email}` + info.response);
+            }
+        });
+        return res.json({ error: "verfy your email first before login" });
+        // const verify = jwt.verify(token, secret);
+        // res.render("index", { email: verify.email, status: "Not Verified" });
     } catch (error) {
         console.log(error);
-        res.json({ status: "Not Verified" });
+        // res.json({ status: "Not Verified" });
     }
 };
 const reset_password_id_token_post = async (req, res) => {
@@ -311,38 +336,39 @@ const reset_password_id_token_post = async (req, res) => {
     const { password } = req.body;
 
     const oldUser = await User.findOne({ _id: id });
-    if (!oldUser) {
-        return res.json({ status: "User Not Exists!!" });
+    try {
+        if (!oldUser) {
+            return res.json({ status: "User Not Exists!!" });
+        }
+        // const secret = JWT_SECRET + oldUser.password;
+        // const verify = jwt.verify(token, secret);
+        const encryptedPassword = await bcrypt.hash(password, 10);
+        await User.updateOne(
+            {
+                _id: id,
+            },
+            {
+                $set: {
+                    password: encryptedPassword,
+                },
+            }
+        );
+        res.json({ status: "Success" });
+        // res.render("index", { email: verify.email, status: "verified" });
     }
-    const secret = JWT_SECRET + oldUser.password;
-    // try {
-    //     const verify = jwt.verify(token, secret);
-    //     const encryptedPassword = await hash(password, 10);
-    //     await User.updateOne(
-    //         {
-    //             _id: id,
-    //         },
-    //         {
-    //             $set: {
-    //                 password: encryptedPassword,
-    //             },
-    //         }
-    //     );
-
-    //     res.render("index", { email: verify.email, status: "verified" });
-    // } catch (error) {
-    //     console.log(error);
-    //     res.json({ status: "Something Went Wrong" });
-    // }
+    catch (error) {
+        console.log(error);
+        res.json({ status: "Something Went Wrong" });
+    }
 };
-// const getAllUser = async (req, res) => {
-//     try {
-//         const allUser = await User.find({});
-//         res.send({ status: "ok", data: allUser });
-//     } catch (error) {
-//         console.log(error);
-//     }
-// };
+const getAllUser = async (req, res) => {
+    try {
+        const allUser = await User.find({});
+        res.send({ status: "ok", data: allUser });
+    } catch (error) {
+        console.log(error);
+    }
+};
 const getAllUser_no_admin = async (req, res) => {
     try {
         const allUser = await User.find({ "email": { $nin: ["admin@gmail.com"] } });
@@ -409,10 +435,6 @@ const upload_image = async (req, res) => {
 const get_image = async (req, res) => {
     const { uid } = req.body;
     try {
-
-        // await Image.find({ 'uid': { $in: `${uid}` } }).then(data => {
-        //     res.send({ status: "ok", data: data })
-        // })
         const image = await Image.findOne({ uid });
         res.send({ status: "ok", data: image });
     } catch (error) {
@@ -484,8 +506,4 @@ const update_user_data = async (req, res) => {
 //   }
 // });
 
-// module.exports = { verify, register, login, userData, forgot_password, reset_password_id_token_get, reset_password_id_token_post, getAllUser, getAllUser_no_admin, getAdmin, deleteUser, upload_image, get_image, logout, update_user_data }
-export default function getAllUser(request, response) {
-    const name = 'World';
-    return response.send(`Hello ${name}!`);
-}
+module.exports = { verify, register, login, userData, forgot_password, reset_password_id_token_get, reset_password_id_token_post, getAllUser, getAllUser_no_admin, getAdmin, deleteUser, upload_image, get_image, logout, update_user_data }
