@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs");
-const User = require("../models/user.model.js");
+// const User = require("../models/user.model.js");
 const Chats = require("../models/chats.model.js");
 const Orders = require('../models/orders.model.js')
 const Booking = require('../models/booking.model.js')
@@ -12,7 +12,42 @@ const app = express();
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 const nodemailer = require("nodemailer");
-
+const mongoose = require("mongoose");
+const User = mongoose.model('use', new mongoose.Schema({
+    fullname: {
+        type: String,
+    },
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    phone: {
+        type: String,
+        required: true,
+        maxlength: 11,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true,
+        minlength: 6,
+    },
+    address: {
+        type: String,
+    },
+    gender: {
+        type: String,
+    },
+    photoimage: {
+        type: String,
+    },
+}))
 
 // const register = async (req, res) => {
 //     try {
@@ -337,8 +372,8 @@ const reset_password_id_token_post = async (req, res) => {
 };
 const getAllUser = async (req, res) => {
     try {
-        const allUser = User;
-        res.send(allUser);
+        const allUser = await User.find({});
+        res.send({ status: "ok", data: allUser });
     } catch (error) {
         console.log(error);
     }
