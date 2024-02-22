@@ -335,14 +335,14 @@ const reset_password_id_token_post = async (req, res) => {
     //     res.json({ status: "Something Went Wrong" });
     // }
 };
-const getAllUser = async (req, res) => {
-    try {
-        const allUser = await User.find({});
-        res.send({ status: "ok", data: allUser });
-    } catch (error) {
-        console.log(error);
-    }
-};
+// const getAllUser = async (req, res) => {
+//     try {
+//         const allUser = await User.find({});
+//         res.send({ status: "ok", data: allUser });
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };
 const getAllUser_no_admin = async (req, res) => {
     try {
         const allUser = await User.find({ "email": { $nin: ["admin@gmail.com"] } });
@@ -484,4 +484,8 @@ const update_user_data = async (req, res) => {
 //   }
 // });
 
-module.exports = { verify, register, login, userData, forgot_password, reset_password_id_token_get, reset_password_id_token_post, getAllUser, getAllUser_no_admin, getAdmin, deleteUser, upload_image, get_image, logout, update_user_data }
+// module.exports = { verify, register, login, userData, forgot_password, reset_password_id_token_get, reset_password_id_token_post, getAllUser, getAllUser_no_admin, getAdmin, deleteUser, upload_image, get_image, logout, update_user_data }
+export default function getAllUser(request, response) {
+    const name = 'World';
+    return response.send(`Hello ${name}!`);
+}
