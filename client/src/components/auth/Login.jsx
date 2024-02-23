@@ -29,7 +29,7 @@ const Login = () => {
         else {
             // await axios.post('https://mern-lava-server.onrender.com/api/auth/login', { email, password })
             // await axios.post('https://mern-lava-server.vercel.app/api/auth/login', { email, password })
-            await axios.post(`${process.env.BASE_API_URL_HOST}/auth/login`, { email, password })
+            await axios.post(`http://localhost:5000/api/auth/login`, { email, password })
                 .then(res => {
                     console.log(res.data, "userRegister");
                     if (res.data.status == "ok") {
