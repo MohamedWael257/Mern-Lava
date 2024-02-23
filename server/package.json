@@ -13,7 +13,7 @@
   "keywords": [],
   "author": "",
   "engines": {
-    "node": "v20.11.1"
+    "node": "v18.16.1"
   },
   "license": "ISC",
   "dependencies": {
@@ -41,7 +41,6 @@
     "socket.io": "^4.7.4"
   },
   "devDependencies": {
-    "@vercel/node": "^3.0.20",
     "nodemon": "^3.0.3"
   }
 }
