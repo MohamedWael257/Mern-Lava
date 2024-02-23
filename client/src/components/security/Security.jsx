@@ -50,7 +50,7 @@ const Security = () => {
         await axios.get(`http://localhost:5000/api/auth/reset-password/${id}/${token}`)
             .then((res) => {
                 // toast.success("check your Email inbox")
-                console.log(res.data)
+                toast.success(res.data.status)
                 setLoading(false)
             })
             .catch((error) => {
