@@ -13,9 +13,9 @@ const app = express();
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 const nodemailer = require("nodemailer");
-export const maxDuration = 30000; // This function can run for a maximum of 5 seconds
-export const dynamic = 'force-dynamic';
-
+const maxDuration = 30000; // This function can run for a maximum of 5 seconds
+const dynamic = 'force-dynamic';
+module.exports = { maxDuration, dynamic }
 const register = async (req, res) => {
     const { username, email, phone, password, photoimage } = req.body;
 
