@@ -361,9 +361,6 @@ const reset_password_id_token_post = async (req, res) => {
         res.json({ status: "Something Went Wrong" });
     }
 };
-export const maxDuration = 5; // This function can run for a maximum of 5 seconds
-export const dynamic = 'force-dynamic';
-
 const getAllUser = async (req, res) => {
     try {
         const allUser = await User.find({});
