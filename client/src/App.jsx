@@ -31,6 +31,7 @@ import { getorders } from './redux/slice/orderslice'
 import { ToastContainer } from 'react-toastify'
 import { getbooking } from './redux/slice/bookingslice'
 import { getservices } from './redux/slice/serviceslice'
+import Resetpassword from './components/auth/Resetpassword'
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -81,6 +82,7 @@ const App = () => {
             <Route path='/checkout' element={currentUser ? <CheckoutPage /> : <LoginPage />} />
             <Route path='/chat' element={currentUser ? <ChatPage /> : <LoginPage />} />
             <Route path='/security' element={currentUser ? <SecurityPage /> : <LoginPage />} />
+            <Route path='/Resetpassword/:id/:token' element={currentUser ? <Resetpassword /> : <LoginPage />} />
             <Route path='/About' element={currentUser ? <AboutPage /> : <LoginPage />} />
             <Route path='/Team' element={currentUser ? <TeamPage /> : <LoginPage />} />
             <Route path='/Contact' element={currentUser ? <ContactPage /> : <LoginPage />} />
