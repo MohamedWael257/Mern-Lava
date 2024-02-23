@@ -79,8 +79,9 @@ app.get("/", async (req, res) => {
 });
 
 // Define routes and middleware
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     connectToMongoDB();
+    server.timeout = 30000;
     console.log(`Server running on port ${PORT}`);
 });
 // server.listen(PORT, () => {
