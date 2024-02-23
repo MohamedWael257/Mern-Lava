@@ -13,45 +13,6 @@ const app = express();
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 const nodemailer = require("nodemailer");
-
-
-// const register = async (req, res) => {
-//     try {
-//         const { username, email, phone, password } = req.body;
-//         bcrypt.hash(password, 10)
-//             .then((hashedPassword) => {
-//                 const user = new User({
-//                     username: username,
-//                     email: email,
-//                     password: hashedPassword,
-//                     phone: phone
-//                 });
-//                 user.save()
-//                     .then((result) => {
-//                         res.send({
-//                             message: "User Created Successfully",
-//                             result,
-//                         });
-//                     })
-//                     .catch((error) => {
-//                         res.send({
-//                             message: "Error creating user",
-//                             error,
-//                         });
-//                     });
-//             })
-//             .catch((e) => {
-//                 res.send({
-//                     message: "Password was not hashed successfully",
-//                     e,
-//                 });
-//             });
-//     }
-//     catch (error) {
-//         console.log("Error in signup controller", error.message);
-//         res.json({ error: "Internal Server Error" });
-//     }
-// }
 const register = async (req, res) => {
     const { username, email, phone, password, photoimage } = req.body;
 
@@ -86,53 +47,7 @@ const register = async (req, res) => {
         res.json({ status: error.message });
     }
 }
-// const login = async (req, res) => {
-//     try {
-//         const { email, password } = req.body;
-//         User.findOne({ email: email })
-//             .then((user) => {
-//                 bcrypt.compare(password, user.password)
-//                     .then((passwordCheck) => {
-//                         if (!passwordCheck) {
-//                             return res.send({
-//                                 message: "Passwords does not match",
-//                                 error,
-//                             });
-//                         }
-//                         const token = jwt.sign(
-//                             {
-//                                 userId: user._id,
-//                                 userEmail: user.email,
-//                             },
-//                             "RANDOM-TOKEN",
-//                             { expiresIn: "24h" }
-//                         );
 
-//                         res.send({
-//                             message: "Login Successful",
-//                             email: user.email,
-//                             token,
-//                         });
-//                     })
-//                     .catch((error) => {
-//                         res.send({
-//                             message: "Passwords does not match",
-//                             error,
-//                         });
-//                     });
-//             })
-//             .catch((e) => {
-//                 res.send({
-//                     message: "Email not found",
-//                     e,
-//                 });
-//             });
-//     }
-//     catch (error) {
-//         console.log("Error in login controller", error.message);
-//         res.status(500).json({ error: "Internal Server Error" });
-//     }
-// };
 const login = async (req, res) => {
     const { email, password } = req.body;
 
@@ -323,7 +238,7 @@ const reset_password_id_token_get = async (req, res) => {
                 res.json(`Email sent: ${email}` + info.response);
             }
         });
-        return res.json({ error: "verfy your email first before login" });
+        return res.json({ status: "verfy your email first before login" });
         // const verify = jwt.verify(token, secret);
         // res.render("index", { email: verify.email, status: "Not Verified" });
     } catch (error) {
@@ -441,18 +356,7 @@ const get_image = async (req, res) => {
         res.send({ status: "error", data: error });
     }
 }
-// app.get("/api/images/:id", (req, res) => {
-//     const id = req.params.id;
-//     Image.findById(id)
-//         .then((image) => {
-//             res.setHeader("Content-Type", image.type);
-//             res.send(image.data);
-//         })
-//         .catch((error) => {
-//             console.error(error);
-//             res.status(500).send("Error retrieving image");
-//         });
-// });
+
 const logout = (req, res) => {
     try {
         res.cookie("jwt", "", { maxAge: 0 });
@@ -479,31 +383,5 @@ const update_user_data = async (req, res) => {
     }
 
 }
-// const multer = require('multer');
-
-// const Image = require('../models/Image.model.js');
-
-// // Configure multer for file uploads
-// const storage = multer.memoryStorage();
-// const upload = multer({ storage });
-
-// // Upload image route
-// app.post('upload-image', upload.single('image'), async (req, res) => {
-//   try {
-//     const { originalname, buffer, mimetype } = req.file;
-//     const image = new Image({
-//       name: originalname,
-//       image: {
-//         data: buffer,
-//         contentType: mimetype,
-//       },
-//     });
-//     await image.save();
-//     res.json({ message: 'Image uploaded successfully' });
-//   } catch (error) {
-//     console.error('Error uploading image:', error);
-//     res.status(500).json({ message: 'Internal server error' });
-//   }
-// });
 
 module.exports = { verify, register, login, userData, forgot_password, reset_password_id_token_get, reset_password_id_token_post, getAllUser, getAllUser_no_admin, getAdmin, deleteUser, upload_image, get_image, logout, update_user_data }
