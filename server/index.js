@@ -75,7 +75,12 @@ const connectToMongoDB = require("./db/ConnectToMongoDB.js");
 //   console.log('Connected to MongoDB');
 // });
 app.get("/", async (req, res) => {
-    res.send("server running")
+    // res.send("server running")
+    for (let index = 0; index < 5; index++) {
+        res.send(`server running ${index}`)
+
+
+    }
 });
 
 // Define routes and middleware
