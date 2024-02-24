@@ -5,7 +5,7 @@ const initialState = {
     earning: 0
 }
 export const getorders = createAsyncThunk("order/getorders", () => {
-    return fetch("http://localhost:5000/api/store/ordersData")
+    return fetch(`${process.env.BASE_API_URL_HOST}/store/ordersData`)
         .then((respons) => { return respons.json() })
 })
 const orderslice = createSlice({

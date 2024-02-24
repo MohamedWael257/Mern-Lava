@@ -78,7 +78,7 @@ const Addservice = () => {
                 //     setImage(null);
                 //     setImagePreview(null);
                 // }
-                await axios.post('http://localhost:5000/api/products/add-service', {
+                await axios.post(`${process.env.BASE_API_URL_HOST}/api/products/add-service`, {
                     title: curentservice.title,
                     // ImageUrl: imageUrl,
                     serviceprice: curentservice.serviceprice,
@@ -117,7 +117,7 @@ const Addservice = () => {
                 //     setImage(null);
                 //     setImagePreview(null);
                 // }
-                await axios.put(`http://localhost:5000/api/products/add-service/${id}`, {
+                await axios.put(`${process.env.BASE_API_URL_HOST}/products/add-service/${id}`, {
                     title: curentservice.title,
                     // ImageUrl: imageUrl,
                     serviceprice: curentservice.serviceprice,

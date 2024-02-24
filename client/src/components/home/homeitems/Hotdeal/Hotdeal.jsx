@@ -82,102 +82,84 @@ const Hotdeal = () => {
     // }
     return (
         <>
-            <section className="hot-deal">
-                <div className="special-items">
-                    <p className="bg-dark text-white grid p-3" style={{ placeContent: "center", cursor: "pointer" }}>Special-Items</p>
-                    {specialitems.map((item) => {
-                        return (
-                            <div key={item.id} className="item">
-                                <img src={item.ImageUrl} height={100} width={100} alt="" />
-                                <div className="detailofitem">
-                                    <p style={{ marginBottom: "-6px" }}>{item.b_title}</p>
-                                    <p style={{ marginBottom: "5px" }}>{item.a_title}</p>
-                                    <span className="text-yellow-600 mr-2">${item.price}</span>
-                                    <span className="line-through">${item.a_price}</span>
-                                </div>
-                            </div>
-                        )
-                    })
-                    }
+            <section className="deals">
+                <h2>Hot Deal</h2>
+                {/* <Carousel data-bs-theme="dark">
+                        <Carousel.Item>
+                            <div className="cards">{carouselUI}</div>
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <div className="cards">{carouselUI}</div>
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <div className="cards">{carouselUI}</div>
+
+                        </Carousel.Item>
+                    </Carousel> */}
+                {/* <br /> */}
+                {/* <Carousel data-bs-theme="dark">
+                        <Carousel.Item>
+                            <div className="cards">{carouseldealUI}</div>
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <div className="cards">{carouseldealUI}</div>
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <div className="cards">{carouseldealUI}</div>
+
+                        </Carousel.Item>
+                    </Carousel> */}
+                <div id="carouselExampleCaptions" data-bs-ride="carousel" className="carousel slide">
+                    <div className="img-cards carousel-inner">
+                        <div className="carousel-item ng-star-inserted active one">
+                            <div className="cards">{carouselUI}</div>
+                        </div>
+                        <div className="carousel-item ng-star-inserted two">
+                            <div className="cards">{carouselUI}</div>
+                        </div>
+                        <div className="carousel-item ng-star-inserted three ">
+                            <div className="cards">{carouselUI}</div>
+
+                        </div>
+                    </div>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev"
+                        className="carousel-control-prev">
+                        <IoIosArrowBack size={35} aria-hidden="true" className="carousel-control-prev-icon bg-black text-[#0f5069e8] w-12 h-12" />
+                        <span className="hidden">Previous</span>
+                    </button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next"
+                        className="carousel-control-next">
+                        <IoIosArrowForward size={35} aria-hidden="true" className="carousel-control-next-icon bg-black text-[#0f5069e8] w-12 h-12" />
+                        <span className="hidden">Next</span>
+                    </button>
                 </div>
-                <div className="deals">
-                    <h2>Hot Deal</h2>
-                    {/* <Carousel data-bs-theme="dark">
-                        <Carousel.Item>
-                            <div className="cards">{carouselUI}</div>
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <div className="cards">{carouselUI}</div>
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <div className="cards">{carouselUI}</div>
-
-                        </Carousel.Item>
-                    </Carousel> */}
-                    {/* <br /> */}
-                    {/* <Carousel data-bs-theme="dark">
-                        <Carousel.Item>
+                <br />
+                <div id="carouselExampleCaptionss" data-bs-ride="carousel" className="carousel slide">
+                    <div className="img-cards carousel-inner">
+                        <div className="carousel-item ng-star-inserted active one">
                             <div className="cards">{carouseldealUI}</div>
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <div className="cards">{carouseldealUI}</div>
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <div className="cards">{carouseldealUI}</div>
-
-                        </Carousel.Item>
-                    </Carousel> */}
-                    <div id="carouselExampleCaptions" data-bs-ride="carousel" className="carousel slide">
-                        <div className="img-cards carousel-inner">
-                            <div className="carousel-item ng-star-inserted active one">
-                                <div className="cards">{carouselUI}</div>
-                            </div>
-                            <div className="carousel-item ng-star-inserted two">
-                                <div className="cards">{carouselUI}</div>
-                            </div>
-                            <div className="carousel-item ng-star-inserted three ">
-                                <div className="cards">{carouselUI}</div>
-
-                            </div>
                         </div>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev"
-                            className="carousel-control-prev">
-                            <IoIosArrowBack size={35} aria-hidden="true" className="carousel-control-prev-icon bg-black text-[#0f5069e8] w-12 h-12" />
-                            <span className="hidden">Previous</span>
-                        </button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next"
-                            className="carousel-control-next">
-                            <IoIosArrowForward size={35} aria-hidden="true" className="carousel-control-next-icon bg-black text-[#0f5069e8] w-12 h-12" />
-                            <span className="hidden">Next</span>
-                        </button>
-                    </div>
-                    <br />
-                    <div id="carouselExampleCaptionss" data-bs-ride="carousel" className="carousel slide">
-                        <div className="img-cards carousel-inner">
-                            <div className="carousel-item ng-star-inserted active one">
-                                <div className="cards">{carouseldealUI}</div>
-                            </div>
-                            <div className="carousel-item ng-star-inserted two">
-                                <div className="cards">{carouseldealUI}</div>
-                            </div>
-                            <div className="carousel-item ng-star-inserted three ">
-                                <div className="cards">{carouseldealUI}</div>
-
-                            </div>
+                        <div className="carousel-item ng-star-inserted two">
+                            <div className="cards">{carouseldealUI}</div>
                         </div>
-                        <button type="button" data-bs-target="#carouselExampleCaptionss" data-bs-slide="prev"
-                            className="carousel-control-prev">
-                            <IoIosArrowBack size={35} aria-hidden="true" className="carousel-control-prev-icon bg-black text-[#0f5069e8] w-12 h-12" />
-                            <span className="hidden">Previous</span>
-                        </button>
-                        <button type="button" data-bs-target="#carouselExampleCaptionss" data-bs-slide="next"
-                            className="carousel-control-next">
-                            <IoIosArrowForward size={35} aria-hidden="true" className="carousel-control-next-icon bg-black text-[#0f5069e8] w-12 h-12" />
-                            <span className="hidden">Next</span>
-                        </button>
+                        <div className="carousel-item ng-star-inserted three ">
+                            <div className="cards">{carouseldealUI}</div>
+
+                        </div>
                     </div>
+                    <button type="button" data-bs-target="#carouselExampleCaptionss" data-bs-slide="prev"
+                        className="carousel-control-prev">
+                        <IoIosArrowBack size={35} aria-hidden="true" className="carousel-control-prev-icon bg-black text-[#0f5069e8] w-12 h-12" />
+                        <span className="hidden">Previous</span>
+                    </button>
+                    <button type="button" data-bs-target="#carouselExampleCaptionss" data-bs-slide="next"
+                        className="carousel-control-next">
+                        <IoIosArrowForward size={35} aria-hidden="true" className="carousel-control-next-icon bg-black text-[#0f5069e8] w-12 h-12" />
+                        <span className="hidden">Next</span>
+                    </button>
                 </div>
             </section>
+
         </>
     )
 }

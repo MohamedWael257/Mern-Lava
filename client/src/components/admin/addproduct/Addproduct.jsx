@@ -79,7 +79,7 @@ const Addproduct = () => {
                 //     setImage(null);
                 //     setImagePreview(null);
                 // }
-                await axios.post('http://localhost:5000/api/products/add-product', {
+                await axios.post(`${process.env.BASE_API_URL_HOST}/products/add-product`, {
                     title: curentproduct.title,
                     // thumbnail: image,
                     price: curentproduct.price,
@@ -121,7 +121,7 @@ const Addproduct = () => {
                 //     setImage(null);
                 //     setImagePreview(null);
                 // }
-                await axios.put(`http://localhost:5000/api/products/edit-product/${id}`, {
+                await axios.put(`${process.env.BASE_API_URL_HOST}/products/edit-product/${id}`, {
                     title: curentproduct.title,
                     // thumbnail: image,
                     price: curentproduct.price,

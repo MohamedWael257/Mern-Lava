@@ -7,7 +7,7 @@ const initialState = {
     maxPrice: 5,
 }
 export const getProducts = createAsyncThunk('products/getProducts', async () => {
-    return fetch("http://localhost:5000/api/products/productsData")
+    return fetch(`${process.env.BASE_API_URL_HOST}/products/productsData`)
         .then((respons) => { return respons.json() })
 });
 const productslice = createSlice({

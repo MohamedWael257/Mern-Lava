@@ -10,7 +10,7 @@ const Resetpassword = () => {
     const [loading, setLoading] = useState(false)
     const [password, setPassword] = useState('mohamedwael')
     const Resetpassword = async () => {
-        await axios.post(`http://localhost:5000/api/auth/reset-password/${id}/${token}`, { password })
+        await axios.post(`${process.env.BASE_API_URL_HOST}/reset-password/${id}/${token}`, { password })
             .then((res) => {
                 toast.success("success reset")
                 // console.log(res.data)

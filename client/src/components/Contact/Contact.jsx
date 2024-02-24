@@ -25,7 +25,7 @@ const Contact = () => {
     const Submitevent = async (e) => {
         e.preventDefault()
         setLoading(true)
-        await axios.post(`http://localhost:5000/api/testimonial/send-testimonial`, { firstname, lastname, email, phone, message, date: dateTime })
+        await axios.post(`${process.env.BASE_API_URL_HOST}/testimonial/send-testimonial`, { firstname, lastname, email, phone, message, date: dateTime })
             .then(res => {
                 console.log(res)
                 setLoading(false)

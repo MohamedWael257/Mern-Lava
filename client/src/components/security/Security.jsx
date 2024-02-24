@@ -45,9 +45,9 @@ const Security = () => {
         const email = currentUser?.email;
         const id = currentUser?._id;
         const token = cookies.get('TOKEN')
-        // await axios.post(`http://localhost:5000/api/auth/forgot-password`, { email })
-        // await axios.post(`http://localhost:5000/api/auth/verify/${token}`)
-        await axios.get(`http://localhost:5000/api/auth/reset-password/${id}/${token}`)
+        // await axios.post(`${process.env.BASE_API_URL_HOST}/auth/forgot-password`, { email })
+        // await axios.post(`${process.env.BASE_API_URL_HOST}/auth/verify/${token}`)
+        await axios.get(`${process.env.BASE_API_URL_HOST}/auth/reset-password/${id}/${token}`)
             .then((res) => {
                 // toast.success("check your Email inbox")
                 toast.success(res.data.status)
@@ -68,7 +68,7 @@ const Security = () => {
                 setImagePreview(reader.result);
                 const uid = currentUser?._id
                 const base64Data = imagePreview;
-                await axios.post('http://localhost:5000/api/auth/upload-image', { image: base64Data, uid: uid })
+                await axios.post(`${process.env.BASE_API_URL_HOST}/auth/upload-image`, { image: base64Data, uid: uid })
                     .then((res) => {
                         // console.log(res);
                         setLoading(false)
@@ -77,7 +77,7 @@ const Security = () => {
                         console.log(err)
                         setLoading(false)
                     })
-                await axios.post('http://localhost:5000/api/auth/get-image', { uid: uid })
+                await axios.post(`${process.env.BASE_API_URL_HOST}/auth/get-image`, { uid: uid })
                     .then((res) => {
                         // console.log(res)
                         setPhotoimage(res.data.data.image)
@@ -95,7 +95,7 @@ const Security = () => {
     const save = async (e) => {
         const image = photoimage ? photoimage : imagePreview
         e.preventDefault();
-        await axios.post("http://localhost:5000/api/auth/update-user-data", { email, username, phone, address, fullname, gender, photoimage: image })
+        await axios.post(`${process.env.BASE_API_URL_HOST}/auth/update-user-data`, { email, username, phone, address, fullname, gender, photoimage: image })
             .then((res) => {
                 // toast.success("check your Email inbox")
                 toast.success(res.data.data)

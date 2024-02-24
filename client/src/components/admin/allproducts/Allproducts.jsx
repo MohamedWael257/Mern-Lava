@@ -28,7 +28,7 @@ const Allproducts = () => {
     // }, [dispatch, currentproduct])
     const deleteproduct = async (id) => {
         try {
-            await axios.get(`http://localhost:5000/api/products/delete-product/${id}`)
+            await axios.get(`${BASE_API_URL_HOST}/products/delete-product/${id}`)
                 .then(res => console.log(res.data))
                 .catch(err => console.log(err))
             // await fetch(`http://localhost:5000/delete-product/${id}`, {

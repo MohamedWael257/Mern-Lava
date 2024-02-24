@@ -37,7 +37,7 @@ const Input = ({ selectedUser, currentUser }) => {
             //     setImage(null);
             //     setImagePreview(null);
             // }
-            await axios.post("http://localhost:5000/api/chat/add-chat", {
+            await axios.post(`${process.env.BASE_API_URL_HOST}/chat/add-chat`, {
                 senderId: currentUser?._id,
                 receiverId: selectedUser._id,
                 message,

@@ -32,7 +32,7 @@ const Allservices = () => {
     // }, [dispatch, currentservices])
     const deleteproduct = async (id) => {
         try {
-            await axios.get(`http://localhost:5000/api/products/delete-service/${id}`)
+            await axios.get(`${process.env.BASE_API_URL_HOST}/products/delete-service/${id}`)
                 .then(res => console.log(res))
                 .catch(err => console.log(err))
             // await fetch(`http://localhost:5000/delete-service/${id}`, {

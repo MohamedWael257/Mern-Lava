@@ -20,7 +20,10 @@ const Footer = () => {
                     <div className="overlay">
                         <div className="cell">
                             <img className="logo" src={Logo} width={100} />
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec </p>
+                            <p>LAVA is an application that combines car wash and
+                                car dealership services. The application provides a
+                                unique user experience, as it can help you wash the car
+                                and purchase car tools easily through the application</p>
                             <div className="social">
                                 <ion-icon name="logo-facebook"></ion-icon>
                                 <ion-icon name="logo-twitter"></ion-icon>

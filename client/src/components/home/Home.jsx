@@ -70,9 +70,9 @@ const Home = () => {
             </section>
             <About />
             <OurServices />
-            <Hotdeal />
-            <Fashiondigital />
-            <Pricing />
+            {/* <Hotdeal /> */}
+            {/* <Fashiondigital /> */}
+            {/* <Pricing /> */}
             {/* <About aboutref={aboutref} activeabout={activeabout} />
             <OurServices ourservicesref={ourservicesref} activeouerservices={activeouerservices} />
             <Pricing pricingref={pricingref} activepricing={activepricing} /> */}

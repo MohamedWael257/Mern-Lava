@@ -9,7 +9,7 @@ const initialState = {
     earning: 0
 }
 export const getbooking = createAsyncThunk("booking/getbooking", () => {
-    return fetch("http://localhost:5000/api/booking/bookingData")
+    return fetch(`${process.env.BASE_API_URL_HOST}/booking/bookingData`)
         .then((respons) => { return respons.json() })
 })
 const bookingslice = createSlice({

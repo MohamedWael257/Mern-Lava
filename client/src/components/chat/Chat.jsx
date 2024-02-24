@@ -21,7 +21,7 @@ const Chat = () => {
     useEffect(() => {
         const getusers = async () => {
             if (currentUser?.email === 'admin@gmail.com') {
-                await axios.get("http://localhost:5000/api/auth/getAllUser-no-admin")
+                await axios.get(`${process.env.BASE_API_URL_HOST}/auth/getAllUser-no-admin`)
                     .then(res => {
                         setUsers(res.data.data)
                         setLoading(false)
@@ -29,7 +29,7 @@ const Chat = () => {
                     .catch(err => console.log(err))
             }
             else {
-                await axios.get("http://localhost:5000/api/auth/getAdmin")
+                await axios.get(`${process.env.BASE_API_URL_HOST}/auth/getAdmin`)
                     .then(res => {
                         setUsers(res.data.data)
                         setLoading(false)

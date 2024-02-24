@@ -43,7 +43,7 @@ const Signup = () => {
         setLoading(true)
         const uid = uuid()
         const base64Data = imagePreview;
-        await axios.post('http://localhost:5000/api/auth/upload-image', { image: base64Data, uid: uid })
+        await axios.post(`${process.env.BASE_API_URL_HOST}/auth/upload-image`, { image: base64Data, uid: uid })
             .then((res) => {
                 // console.log(res);
                 setLoading(false)
@@ -52,7 +52,7 @@ const Signup = () => {
                 console.log(err)
                 setLoading(false)
             })
-        await axios.post('http://localhost:5000/api/auth/get-image', { uid: uid })
+        await axios.post(`${process.env.BASE_API_URL_HOST}/auth/get-image`, { uid: uid })
             .then((res) => {
                 // console.log(res)
                 setPhotoimage(res.data.data.image)
@@ -68,7 +68,7 @@ const Signup = () => {
         }
         else {
             // await axios.post('http://localhost:5000/api/auth/register', { username, email, phone, password })
-            await axios.post('http://localhost:5000/api/auth/register', { username, email, phone, password, photoimage })
+            await axios.post(`${process.env.BASE_API_URL_HOST}/auth/register`, { username, email, phone, password, photoimage })
                 // .then(res => console.log(res.data))
                 .then((res) => {
                     console.log(res.data);

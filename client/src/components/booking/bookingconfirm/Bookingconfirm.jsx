@@ -24,7 +24,7 @@ const Bookingconfirm = () => {
     }, [booking])
     const payment = async (e) => {
         e.preventDefault();
-        await axios.post("http://localhost:5000/api/booking/booking", { bookingamount: totprice, bookingdate: dateTime, uid: uid, bookingitem: booking })
+        await axios.post(`${process.env.BASE_API_URL_HOST}/booking/booking`, { bookingamount: totprice, bookingdate: dateTime, uid: uid, bookingitem: booking })
             .then(res => console.log(res))
             .catch(err => console.log(err))
         dispatch(getbooking());

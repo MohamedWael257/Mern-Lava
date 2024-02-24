@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         if (token) {
             setLoading(true)
-            axios.post('http://localhost:5000/api/auth/userData', { token })
+            axios.post(`${process.env.BASE_API_URL_HOST}/auth/userData`, { token })
                 .then((res) => {
                     // console.log("userData", res);
                     // if (res.data.userType == "Admin") {

@@ -28,7 +28,7 @@ const Checkout = () => {
 
     const payment = async (e) => {
         e.preventDefault();
-        await axios.post("http://localhost:5000/api/store/checkout", { orderdate: dateTime, orderamount: totprice, uid: currentUser?._id, orderitem: cart })
+        await axios.post(`${process.env.BASE_API_URL_HOST}/store/checkout`, { orderdate: dateTime, orderamount: totprice, uid: currentUser?._id, orderitem: cart })
             .then(res => console.log(res))
             .catch(err => console.log(err))
         dispatch(getorders());

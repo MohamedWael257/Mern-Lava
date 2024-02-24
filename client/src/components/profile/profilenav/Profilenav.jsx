@@ -54,7 +54,7 @@ const Profilenav = ({ setActiveside }) => {
     }
     const deleteaccount = () => {
         setLoading(true)
-        axios.post("http://localhost:5000/api/auth/deleteUser", { userid: currentUser?.uid })
+        axios.post(`${process.env.BASE_API_URL_HOST}/auth/deleteUser`, { userid: currentUser?.uid })
             .then((res) => {
                 console.log(res);
                 toast.success("logout succeessful...")
