@@ -91,7 +91,7 @@
         gap: 25px;
         grid-template-columns: 25% 72%;
         padding: 25px 15px;
-        background-image: url(../../../../assets/background.png);
+        /* background-image: url(../../../../assets/Background-Hero.png); */
     }
 
     .deals .carousel .cards {
@@ -123,7 +123,7 @@
         gap: 25px;
         grid-template-columns: 100%;
         padding: 25px 15px;
-        background-image: url(../../../../assets/background.png);
+        /* background-image: url(../../../../assets/background.png); */
     }
 
 
