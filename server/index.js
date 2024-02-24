@@ -69,25 +69,13 @@ app.use("/api/chat", chatRoutes);
 app.use("/api/testimonial", testimonialRoutes);
 // Connect to MongoDB
 const connectToMongoDB = require("./db/ConnectToMongoDB.js");
-const User = require("./models/user.model.js");
 // const db = connectToMongoDB.connection;
 // db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 // db.once('open', () => {
 //   console.log('Connected to MongoDB');
 // });
 app.get("/", async (req, res) => {
-    const allusers = await User.find({})
-    try {
-        if (!allusers) {
-            res.send("not users")
-        }
-        else {
-            res.send({ users: allusers })
-        }
-    } catch (error) {
-        res.send("server running")
-    }
-
+    res.send("server running")
 });
 
 // Define routes and middleware
