@@ -8,8 +8,6 @@
     "start": "nodemon index.js",
     "server": "nodemon index.js",
     "build": "npm install",
-    "dev": "nodemon index.js",
-    "start-dev": "nodemon index.js",
     "start-vercel": "vercel dev",
     "deploy-vercel": "vercel deploy --prod"
   },
