@@ -72,7 +72,7 @@ const Home = () => {
             <OurServices />
             {/* <Hotdeal /> */}
             {/* <Fashiondigital /> */}
-            <Pricing />
+            {/* <Pricing /> */}
             {/* <About aboutref={aboutref} activeabout={activeabout} />
             <OurServices ourservicesref={ourservicesref} activeouerservices={activeouerservices} />
             <Pricing pricingref={pricingref} activepricing={activepricing} /> */}
