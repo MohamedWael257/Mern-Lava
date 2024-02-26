@@ -277,10 +277,10 @@ const reset_password_id_token_post = async (req, res) => {
         res.json({ status: "Something Went Wrong" });
     }
 };
-const getAllUser = (req, res) => {
+const getAllUser = async(req, res) => {
     try {
-        const allUser = User.find({});
-        res.send({ status: "ok" ,data:allUser});
+        const allUser =await User.find({});
+        res.send(allUser);
     } catch (error) {
         console.log(error);
     }
@@ -290,7 +290,7 @@ const getAllUser_no_admin = async (req, res) => {
         const allUser = await User.find({ "email": { $nin: ["admin@gmail.com"] } });
         res.send({ status: "ok", data: allUser });
     } catch (error) {
-        console.log(error);
+        res.send(error);
     }
 };
 const getAdmin = async (req, res) => {
