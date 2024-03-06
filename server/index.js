@@ -86,19 +86,6 @@ const connectToMongoDB = require("./db/ConnectToMongoDB.js");
 app.get("/", async (req, res) => {
     res.send("server running")
 });
-const Attendance = require('./models/test.model.js'); // Adjust the path as per your project structure
-const { default: mongoose } = require("mongoose");
-
-
-
-app.get('/getattendance', async (req, res) => {
-
-    const db = mongoose.connection.db;
-    const subjectsCollection = db.collection('attendances');
-    const attendanceStud = await subjectsCollection.find().toArray();
-    res.json(attendanceStud);
-
-});
 
 // Define routes and middleware
 const server = app.listen(PORT, () => {
