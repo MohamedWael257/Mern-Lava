@@ -89,7 +89,7 @@ const login = async (req, res) => {
                     res.json(`Email sent: ${email}` + info.response);
                 }
             });
-            return res.json({ error: "verfy your email first before login" });
+            return res.json({ status: "verfy your email first before login" });
         }
         else {
             return res.json({ status: "ok", data: token });
