@@ -92,16 +92,12 @@ const { default: mongoose } = require("mongoose");
 
 
 app.get('/getattendance', async (req, res) => {
-    try {
-        const db = mongoose.connection.db;
-        const subjectsCollection = db.collection('attendances');
-        const attendanceStud = await subjectsCollection.find().toArray();
 
-        res.json(attendanceStud);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+    const db = mongoose.connection.db;
+    const subjectsCollection = db.collection('attendances');
+    const attendanceStud = await subjectsCollection.find().toArray();
+    res.json(attendanceStud);
+
 });
 
 // Define routes and middleware
