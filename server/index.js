@@ -88,7 +88,10 @@ app.get("/", async (req, res) => {
 });
 
 // Define routes and middleware
-const server = app.listen(PORT, () => {
+const http = require('http')
+const server = http.createServer(app);
+
+server.listen(PORT, () => {
     connectToMongoDB();
     server.timeout = 30000;
     console.log(`Server running on port ${PORT}`);
