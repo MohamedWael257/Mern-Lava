@@ -1,99 +1,80 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-// const { app, server } = require('./socket/socket.js');
-const path = require("path");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 
 const PORT = process.env.PORT || 5000
-// app.options('', cors(
-//     {
-//         origin: '*',
-//         // origin: ['https://mern-lava-server.vercel.app'],
-//         methods: ['POST', 'GET', 'PUT', 'DELETE'],
-//         credentials: true
-//     }
-// ));
-// app.use(cors(
-//     {
-//         origin: ['https://mern-lava-server.vercel.app'],
-//         methods: ['POST', 'GET', 'PUT', 'DELETE'],
-//         credentials: true
-//     }
-// ));
-
-// httpProxy = require('http-proxy');
-// const proxy = httpProxy.createProxyServer({
-//     target: 'https://mern-lava-client.vercel.app',
-//     ws: true, // Enable WebSocket support
-// });
-
-
-// const __dirname = path.resolve();
-// __dirname = path.resolve();
 
 dotenv.config();
-
-// app.use(express.static(path.resolve(__dirname, '/client/dist')));
-// app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'), function (err) {
-//         if (err) {
-//             res.status(500).send(err)
-//         }
-//     });
-// })
-
-const authRoutes = require("./routes/auth.routes");
-const bookingRoutes = require("./routes/booking.routes");
-const productsRoutes = require("./routes/products.routes");
-const storeRoutes = require("./routes/store.routes");
-const chatRoutes = require("./routes/chat.routes");
-const testimonialRoutes = require('./routes/testimonial.routes')
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.json({ limit: "25mb" }));
-// let corsOptions = {
-//     origin: ["http://localhost:5000", "https://mern-lava-server.vercel.app"],
-// methods: ['POST', 'GET', 'PUT', 'DELETE'],
-// credentials: true
-// };
-// app.use(cors(corsOptions));
-// app.use(cors())
-app.use(cors(
-    {
-        origin: ["https://mern-lava-client.vercel.app", "localhost:3000"],
-        methods: ["POST", "GET"],
-        credentials: true
-    }
-));
+app.use(cors())
+
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/api/auth", authRoutes);
-app.use("/api/booking", bookingRoutes);
-app.use("/api/products", productsRoutes);
-app.use("/api/store", storeRoutes);
-app.use("/api/chat", chatRoutes);
-app.use("/api/testimonial", testimonialRoutes);
-// Connect to MongoDB
-const connectToMongoDB = require("./db/ConnectToMongoDB.js");
-// const db = connectToMongoDB.connection;
-// db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-// db.once('open', () => {
-//   console.log('Connected to MongoDB');
-// });
+const mongoose = require('mongoose')
+const connectToMongoDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_URI)
+        console.log("Connected to MongoDB");
+    } catch (error) {
+        console.log("Error connecting to MongoDB", error.message);
+    }
+};
+const UserSchema = new mongoose.Schema({
+    fullname: {
+        type: String,
+    },
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    phone: {
+        type: String,
+        required: true,
+        maxlength: 11,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true,
+        minlength: 6,
+    },
+    address: {
+        type: String,
+    },
+    gender: {
+        type: String,
+    },
+    photoimage: {
+        type: String,
+    }
+
+});
+
+const User = mongoose.model('user', UserSchema)
 app.get("/", async (req, res) => {
-    res.send("server running")
+    const allUser = await User.find({});
+    try {
+        res.send(allUser);
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 // Define routes and middleware
-const http = require('http')
-const server = http.createServer(app);
-
-server.listen(PORT, () => {
+app.listen(PORT, () => {
     connectToMongoDB();
-    server.timeout = 30000;
+    // server.timeout = 30000;
     console.log(`Server running on port ${PORT}`);
 });
 // server.listen(PORT, () => {
