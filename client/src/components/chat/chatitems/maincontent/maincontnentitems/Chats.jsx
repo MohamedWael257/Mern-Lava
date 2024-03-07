@@ -8,7 +8,7 @@ const Chats = ({ selectedUser, currentUser }) => {
     const chatRef = useRef(null);
 
     useEffect(() => {
-        axios.post(`${process.env.BASE_API_URL_HOST}/chat/chatsData`, { userid: currentUser?._id, selectedid: selectedUser._id })
+        axios.post(`${process.env.BASE_API_URL_HOST}/chat/chatsdata`, { userid: currentUser?._id, selectedid: selectedUser._id })
             .then(res => setMessages(res.data.data))
             .catch(err => console.log(err))
 
