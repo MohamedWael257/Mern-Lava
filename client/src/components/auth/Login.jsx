@@ -89,7 +89,7 @@ const Login = () => {
     const Handleforget = async (e) => {
         e.preventDefault();
         const email = 'mohamedwael4553@gmail.com'
-        await axios.post(`${BASE_API_URL_HOST}/auth/forgot-password`, { email })
+        await axios.post(`${BASE_API_URL_HOST}/auth/forgot-password`, { timeout: 10000 }, { email })
             .then(res => { console.log(res) })
             .catch(err => console.log(err))
     }
