@@ -28,7 +28,7 @@ const Resetpassword = () => {
             <p>email :: {currentUser?.email}</p>
             <p>id :: {id}</p>
             <p>token ::{token}</p>
-            <input type="text" placeholder='enter new password' value={password} />
+            <input type="text" placeholder='Enter New Password' value={password} />
             <button onClick={Resetpassword}>dddd</button>
         </>
     )
