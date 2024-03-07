@@ -29,7 +29,7 @@ const Login = () => {
         else {
             // await axios.post('https://mern-lava-server.onrender.com/api/auth/login', { email, password })
             // await axios.post('https://mern-lava-server.vercel.app/api/auth/login', { email, password })
-            await axios.post(`${process.env.BASE_API_URL_HOST}/auth/login`, { email, password })
+            await axios.post(`${process.env.BASE_API_URL_HOST}/auth/login`, { timeout: 10000 }, { email, password })
                 .then(res => {
                     console.log(res.data, "userRegister");
                     if (res.data.status == "ok") {
@@ -89,7 +89,7 @@ const Login = () => {
     const Handleforget = async (e) => {
         e.preventDefault();
         const email = 'mohamedwael4553@gmail.com'
-        await axios.post(`${BASE_API_URL_HOST}/auth/forgot-password`, { timeout: 10000 }, { email })
+        await axios.post(`${process.env.BASE_API_URL_HOST}/auth/forgot-password`, { email })
             .then(res => { console.log(res) })
             .catch(err => console.log(err))
     }
